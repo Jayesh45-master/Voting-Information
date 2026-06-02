@@ -355,16 +355,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chat-message.user {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1E3A8A 100%);
-  color: var(--white);
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1E3A8A 100%) !important;
+  color: var(--white) !important;
   align-self: flex-end;
   border-radius: 16px 16px 0 16px;
   box-shadow: 0 4px 12px rgba(239, 108, 0, 0.15);
 }
 
 .chat-message.assistant {
-  background: var(--chat-bg-assistant);
-  color: var(--chat-text-assistant);
+  background: var(--chat-bg-assistant) !important;
+  color: var(--chat-text-assistant) !important;
   align-self: flex-start;
   border-radius: 16px 16px 16px 0;
   border: 1px solid var(--border-color);
@@ -386,8 +386,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--border-color);
   border-radius: 30px;
   font-family: var(--font-body);
-  background: var(--chat-bg-input-field);
-  color: var(--text-main);
+  background: var(--chat-bg-input-field) !important;
+  color: var(--text-main) !important;
   outline: none;
   font-size: 0.9rem;
   transition: all 0.2s ease;
