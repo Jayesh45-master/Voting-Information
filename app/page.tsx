@@ -16,13 +16,15 @@ export default function Home() {
   return (
     <main style={{ background: 'var(--background-light)', minHeight: '100vh', transition: 'background 0.3s ease' }}>
       {/* Alert Banner / Marquee */}
-      <div className="alert-banner" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', paddingLeft: '1.5rem', fontWeight: 800 }}>
+      <div className="alert-banner">
+        <div className="alert-banner-badge">
           <ShieldAlert size={18} />
           <span>NOTICE / सूचना:</span>
         </div>
-        <div className="alert-banner-content" style={{ flex: 1 }}>
-          UPCOMING: Voter registration for 2027 state elections will open soon. Keep your documents ready! | आवश्यक सूचना: 2027 राज्य चुनावों के लिए मतदाता पंजीकरण जल्द ही शुरू होगा। अपने दस्तावेज तैयार रखें!
+        <div className="alert-banner-track">
+          <div className="alert-banner-content">
+            UPCOMING: Voter registration for 2027 state elections will open soon. Keep your documents ready! | आवश्यक सूचना: 2027 राज्य चुनावों के लिए मतदाता पंजीकरण जल्द ही शुरू होगा। अपने दस्तावेज तैयार रखें!
+          </div>
         </div>
       </div>
 

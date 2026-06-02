@@ -88,17 +88,41 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.5rem 0;
   font-weight: 600;
   font-size: 0.95rem;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
   white-space: nowrap;
+}
+
+/* Static badge — sits above the scrolling text */
+.alert-banner-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 1rem 0 1.2rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  background-color: var(--secondary-color);
+  /* Subtle right fade so badge blends into ticker */
+  box-shadow: 6px 0 10px 6px var(--secondary-color);
+}
+
+/* Scrolling ticker — clips overflow inside its own box */
+.alert-banner-track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
 }
 
 .alert-banner-content {
   display: inline-block;
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left 28s linear infinite;
+  padding-left: 2rem;
 }
 
 @keyframes scroll-left {
-  0% { transform: translateX(100vw); }
+  0%   { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
 
