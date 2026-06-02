@@ -583,6 +583,18 @@ h1, h2, h3, h4, h5, h6 {
 .tab-label-short { display: none; }
 .tab-label-full  { display: inline; }
 
+/* Simulator Control Buttons — never overridden by global .btn mobile rules */
+.sim-controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.sim-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+  margin-bottom: 0 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0;
+}
+.sim-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
 /* ========================================== */
 /*   RESPONSIVE / MOBILE-FRIENDLY BREAKPOINTS */
 /* ========================================== */

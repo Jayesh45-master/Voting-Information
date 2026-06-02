@@ -266,7 +266,7 @@ export default function LiveCountingWidget() {
   return (
     <div className="card live-counting-card glass-panel" style={{ padding: '2rem', border: '1px solid rgba(255,255,255,0.1)', animation: 'fadeIn 0.4s ease' }}>
       {/* Header and Controls */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyItems: 'center', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
+      <div className="sim-header" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', gap: '1rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{
@@ -282,17 +282,60 @@ export default function LiveCountingWidget() {
           <span className="hi" style={{ fontSize: '1rem', color: 'var(--text-muted)', display: 'block', marginTop: '0.1rem' }}>उत्तर प्रदेश विधानसभा - निर्वाचन क्षेत्र मतगणना</span>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <button className="btn btn-outline" onClick={handlePlayPause} style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}>
-            {isPlaying ? <><Pause size={16} /> Pause</> : <><Play size={16} /> Start</>}
+        <div className="sim-controls" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <button
+            className="sim-btn sim-btn-action"
+            onClick={handlePlayPause}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+              padding: '0.5rem 1rem', borderRadius: '20px', border: '2px solid var(--primary-color)',
+              background: isPlaying ? 'var(--primary-color)' : 'transparent',
+              color: isPlaying ? '#fff' : 'var(--primary-color)',
+              fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer',
+              transition: 'all 0.2s ease', whiteSpace: 'nowrap'
+            }}
+          >
+            {isPlaying ? <><Pause size={14} /> Pause</> : <><Play size={14} /> Start</>}
           </button>
-          <button className="btn btn-outline" onClick={handleReset} style={{ padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <RotateCcw size={16} />
+          <button
+            className="sim-btn sim-btn-action"
+            onClick={handleReset}
+            title="Reset"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+              padding: '0.5rem 0.9rem', borderRadius: '20px', border: '2px solid var(--primary-color)',
+              background: 'transparent', color: 'var(--primary-color)',
+              fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer',
+              transition: 'all 0.2s ease', whiteSpace: 'nowrap'
+            }}
+          >
+            <RotateCcw size={14} /> Reset
           </button>
-          <button className="btn btn-outline" onClick={handleFastForward} style={{ padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <FastForward size={16} />
+          <button
+            className="sim-btn sim-btn-action"
+            onClick={handleFastForward}
+            title="Fast Forward"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+              padding: '0.5rem 0.9rem', borderRadius: '20px', border: '2px solid var(--primary-color)',
+              background: 'transparent', color: 'var(--primary-color)',
+              fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer',
+              transition: 'all 0.2s ease', whiteSpace: 'nowrap'
+            }}
+          >
+            <FastForward size={14} /> Skip
           </button>
-          <button className="btn btn-primary" onClick={() => { handleReset(); setSimulationActive(false); }} style={{ padding: '0.5rem 1rem', fontSize: '0.85rem', background: '#555' }}>
+          <button
+            className="sim-btn sim-btn-exit"
+            onClick={() => { handleReset(); setSimulationActive(false); }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+              padding: '0.5rem 1rem', borderRadius: '20px', border: '2px solid #78909C',
+              background: '#78909C', color: '#fff',
+              fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer',
+              transition: 'all 0.2s ease', whiteSpace: 'nowrap'
+            }}
+          >
             Exit Sim
           </button>
         </div>
