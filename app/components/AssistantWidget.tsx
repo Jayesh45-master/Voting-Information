@@ -70,20 +70,31 @@ export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab:
       {isOpen && (
         <div className="chat-widget">
           <div className="chat-header">
-            <span>{language === 'hi' ? 'चुनाव सहायक' : 'Election Assistant'}</span>
+            <div className="chat-header-title">
+              <span className="chat-online-indicator" />
+              <span>{language === 'hi' ? 'चुनाव सहायक' : 'Election Assistant'}</span>
+            </div>
             <button 
               onClick={() => setIsOpen(false)} 
-              style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}
+              style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
             >
               <X size={20} />
             </button>
           </div>
           
           {!language ? (
-            <div className="chat-body" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-              <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)' }}>Select Language<br/><span style={{ fontSize: '1rem' }}>भाषा चुनें</span></h3>
-              <button className="btn btn-outline" style={{ marginBottom: '1rem', width: '80%' }} onClick={() => handleLanguageSelect('en')}>English</button>
-              <button className="btn btn-outline" style={{ width: '80%' }} onClick={() => handleLanguageSelect('hi')}>हिन्दी</button>
+            <div className="chat-body" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '1.5rem', background: 'white' }}>
+              <div style={{ display: 'inline-flex', padding: '1rem', borderRadius: '50%', background: 'rgba(239,108,0,0.08)', color: 'var(--primary-color)' }}>
+                <MessageSquare size={36} />
+              </div>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1.2rem', color: 'var(--text-main)', fontWeight: 700 }}>Choose Language</h4>
+                <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>अपनी भाषा का चयन करें</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', width: '100%', maxWidth: '240px' }}>
+                <button className="btn btn-outline" style={{ padding: '0.7rem', borderRadius: '30px', fontWeight: 600, fontSize: '0.9rem' }} onClick={() => handleLanguageSelect('en')}>English</button>
+                <button className="btn btn-outline" style={{ padding: '0.7rem', borderRadius: '30px', fontWeight: 600, fontSize: '0.9rem' }} onClick={() => handleLanguageSelect('hi')}>हिन्दी (Hindi)</button>
+              </div>
             </div>
           ) : (
             <>
@@ -161,8 +172,12 @@ export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab:
                   </div>
                 ))}
                 {isLoading && (
-                  <div className="chat-message assistant">
-                    <span className="animate-pulse">...</span>
+                  <div className="chat-message assistant" style={{ padding: '0.5rem 0.8rem' }}>
+                    <div className="typing-indicator">
+                      <div className="typing-dot" />
+                      <div className="typing-dot" />
+                      <div className="typing-dot" />
+                    </div>
                   </div>
                 )}
                 <div ref={messagesEndRef} />
