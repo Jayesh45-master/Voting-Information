@@ -409,17 +409,17 @@ const quizData = [
     options: ["3 seconds", "5 seconds", "7 seconds", "10 seconds"],
     optionsHi: ["3 सेकंड", "5 सेकंड", "7 सेकंड", "10 सेकंड"],
     correctAnswerIndex: 2,
-    explanation: "The printed VVPAT paper slip containing the candidate's serial number, name, and symbol is displayed behind a glass window for 7 seconds before falling into the sealed box.",
-    explanationHi: "उम्मीदवार की क्रम संख्या, नाम और चुनाव चिह्न वाली मुद्रित वीवीपैट पेपर पर्ची सीलबंद बॉक्स में गिरने से पहले 7 सेकंड के लिए ग्लास विंडो के पीछे प्रदर्शित होती है।"
+    explanation: "The printed VVPAT paper slip is displayed behind a glass window for 7 seconds before falling into the sealed box.",
+    explanationHi: "मुद्रित वीवीपैट पेपर पर्ची सीलबंद बॉक्स में गिरने से पहले 7 सेकंड के लिए ग्लास विंडो के पीछे प्रदर्शित होती है।"
   },
   {
-    question: "Which official mobile app can citizens use to report violations of the Model Code of Conduct directly to the ECI?",
+    question: "Which official mobile app can citizens use to report violations of the Model Code of Conduct to the ECI?",
     questionHi: "आदर्श आचार संहिता के उल्लंघन की रिपोर्ट सीधे चुनाव आयोग को करने के लिए नागरिक किस आधिकारिक मोबाइल ऐप का उपयोग कर सकते हैं?",
     options: ["Voter Helpline App", "cVIGIL", "Saksham App", "KYC App"],
     optionsHi: ["वोटर हेल्पलाइन ऐप", "सी-विजिल (cVIGIL)", "सक्षम ऐप", "केवाईसी (KYC) ऐप"],
     correctAnswerIndex: 1,
-    explanation: "cVIGIL (Vigilant Citizen) is an ECI app that allows citizens to upload photos or videos of model code violations, which are resolved within a 100-minute timeline.",
-    explanationHi: "सी-विजिल (cVIGIL) चुनाव आयोग का एक ऐप है जो नागरिकों को आचार संहिता के उल्लंघन की तस्वीरें या वीडियो अपलोड करने की अनुमति देता है, जिनका निवारण 100 मिनट के भीतर किया जाता है।"
+    explanation: "cVIGIL (Vigilant Citizen) is an ECI app that allows citizens to upload photos or videos of model code violations, resolved within a 100-minute timeline.",
+    explanationHi: "सी-विजिल चुनाव आयोग का एक ऐप है जो नागरिकों को आचार संहिता के उल्लंघन की तस्वीरें या वीडियो अपलोड करने की अनुमति देता है।"
   },
   {
     question: "What does NOTA stand for on the ballot/EVM?",
@@ -427,10 +427,146 @@ const quizData = [
     options: ["No Options To Approve", "None Of The Above", "National Order for Trustworthy Candidates", "Name of The Alliance"],
     optionsHi: ["नो ऑप्शंस टू अप्रूव", "नन ऑफ द अबव (इनमें से कोई नहीं)", "नेशनल ऑर्डर फॉर ट्रस्टवर्दी कैंडिडेट्स", "नेम ऑफ द अलायंस"],
     correctAnswerIndex: 1,
-    explanation: "NOTA stands for 'None of the Above'. It was introduced in India in 2013 following a Supreme Court directive to give voters a right to reject all candidates.",
-    explanationHi: "नोटा (NOTA) का मतलब 'नन ऑफ द अबव' है। मतदाताओं को सभी उम्मीदवारों को अस्वीकार करने का अधिकार देने के लिए सर्वोच्च न्यायालय के निर्देश के बाद 2013 में इसे भारत में पेश किया गया था।"
+    explanation: "NOTA stands for 'None of the Above'. It was introduced in India in 2013 following a Supreme Court directive.",
+    explanationHi: "नोटा (NOTA) का मतलब 'नन ऑफ द अबव' है। सर्वोच्च न्यायालय के निर्देश के बाद 2013 में इसे भारत में पेश किया गया था।"
+  },
+  {
+    question: "What is the full form of EVM?",
+    questionHi: "EVM का पूरा नाम क्या है?",
+    options: ["Electronic Voter Machine", "Electronic Voting Machine", "Election Voting Module", "Electoral Verification Machine"],
+    optionsHi: ["इलेक्ट्रॉनिक वोटर मशीन", "इलेक्ट्रॉनिक वोटिंग मशीन", "इलेक्शन वोटिंग मॉड्यूल", "इलेक्टोरल वेरिफिकेशन मशीन"],
+    correctAnswerIndex: 1,
+    explanation: "EVM stands for Electronic Voting Machine. India started using EVMs in elections from 1982 and it became the sole method in 2001.",
+    explanationHi: "EVM का अर्थ है इलेक्ट्रॉनिक वोटिंग मशीन। भारत ने 1982 से चुनावों में EVM का उपयोग शुरू किया और 2001 में यह एकमात्र तरीका बन गया।"
+  },
+  {
+    question: "The Model Code of Conduct (MCC) comes into effect from which moment?",
+    questionHi: "आदर्श आचार संहिता (MCC) किस क्षण से लागू होती है?",
+    options: ["On Election Day", "Upon announcement of the election schedule", "One month before voting", "When candidates file nominations"],
+    optionsHi: ["चुनाव के दिन", "चुनाव कार्यक्रम की घोषणा पर", "मतदान से एक महीने पहले", "जब उम्मीदवार नामांकन दाखिल करें"],
+    correctAnswerIndex: 1,
+    explanation: "The Model Code of Conduct immediately comes into force as soon as the election schedule is announced by the Election Commission of India.",
+    explanationHi: "आदर्श आचार संहिता तुरंत लागू हो जाती है जैसे ही भारत निर्वाचन आयोग चुनाव कार्यक्रम की घोषणा करता है।"
+  },
+  {
+    question: "Under which rule does a physically disabled voter have the right to bring a companion to assist them?",
+    questionHi: "किस नियम के तहत एक शारीरिक रूप से दिव्यांग मतदाता को सहायक लाने का अधिकार है?",
+    options: ["Rule 49A", "Rule 49N", "Rule 50B", "Rule 62C"],
+    optionsHi: ["नियम 49A", "नियम 49N", "नियम 50B", "नियम 62C"],
+    correctAnswerIndex: 1,
+    explanation: "Rule 49N of the Conduct of Elections Rules, 1961 allows blind and physically disabled voters who cannot record their vote to bring a companion above 18 years.",
+    explanationHi: "चुनाव संचालन नियम, 1961 का नियम 49N नेत्रहीन और शारीरिक रूप से दिव्यांग मतदाताओं को 18 वर्ष से अधिक आयु का एक सहायक लाने की अनुमति देता है।"
+  },
+  {
+    question: "What is the national voter helpline number in India?",
+    questionHi: "भारत में राष्ट्रीय मतदाता हेल्पलाइन नंबर क्या है?",
+    options: ["100", "1800", "1950", "112"],
+    optionsHi: ["100", "1800", "1950", "112"],
+    correctAnswerIndex: 2,
+    explanation: "1950 is the toll-free national voter helpline in India. Citizens can call it for information about voter registration, electoral rolls, and polling booths.",
+    explanationHi: "1950 भारत में निःशुल्क राष्ट्रीय मतदाता हेल्पलाइन है। नागरिक मतदाता पंजीकरण, मतदाता सूची और मतदान केंद्रों की जानकारी के लिए इसे कॉल कर सकते हैं।"
+  },
+  {
+    question: "Which constitutional amendment reduced the voting age from 21 to 18 in India?",
+    questionHi: "किस संविधान संशोधन ने भारत में मतदान की आयु 21 से 18 वर्ष कर दी?",
+    options: ["42nd Amendment", "52nd Amendment", "61st Amendment", "73rd Amendment"],
+    optionsHi: ["42वाँ संशोधन", "52वाँ संशोधन", "61वाँ संशोधन", "73वाँ संशोधन"],
+    correctAnswerIndex: 2,
+    explanation: "The 61st Constitutional Amendment Act of 1988 reduced the voting age from 21 to 18 years, enabling millions of young voters to participate.",
+    explanationHi: "1988 के 61वें संविधान संशोधन अधिनियम ने मतदान की आयु 21 से 18 वर्ष कर दी, जिससे लाखों युवा मतदाताओं को भाग लेने में सहायता मिली।"
+  },
+  {
+    question: "What does VVPAT stand for?",
+    questionHi: "VVPAT का पूर्ण रूप क्या है?",
+    options: ["Verified Voter Paper Audit Trail", "Voter Verifiable Paper Audit Trail", "Voting Verified Paper and Trail", "Voter Validation Paper Audit Track"],
+    optionsHi: ["वेरिफाइड वोटर पेपर ऑडिट ट्रेल", "वोटर वेरिफायेबल पेपर ऑडिट ट्रेल", "वोटिंग वेरिफाइड पेपर एंड ट्रेल", "वोटर वेलिडेशन पेपर ऑडिट ट्रैक"],
+    correctAnswerIndex: 1,
+    explanation: "VVPAT stands for Voter Verifiable Paper Audit Trail. It is an independent verification system attached to EVMs that allows voters to confirm their vote.",
+    explanationHi: "VVPAT का मतलब वोटर वेरिफायेबल पेपर ऑडिट ट्रेल है। यह EVM से जुड़ा एक स्वतंत्र सत्यापन प्रणाली है जो मतदाताओं को उनके वोट की पुष्टि करने देती है।"
+  },
+  {
+    question: "Which body supervises and directs all elections in India?",
+    questionHi: "भारत में सभी चुनावों की निगरानी और निर्देशन कौन सी संस्था करती है?",
+    options: ["Parliament of India", "Supreme Court of India", "Election Commission of India", "Ministry of Home Affairs"],
+    optionsHi: ["भारतीय संसद", "भारत का सर्वोच्च न्यायालय", "भारत निर्वाचन आयोग", "गृह मंत्रालय"],
+    correctAnswerIndex: 2,
+    explanation: "The Election Commission of India (ECI) is a constitutional body responsible for supervising, directing, and controlling elections to Parliament and State Legislatures.",
+    explanationHi: "भारत निर्वाचन आयोग (ECI) एक संवैधानिक निकाय है जो संसद और राज्य विधानसभाओं के चुनावों की निगरानी, निर्देशन और नियंत्रण के लिए जिम्मेदार है।"
+  },
+  {
+    question: "The 'Saksham' app by ECI is designed specially for which group of voters?",
+    questionHi: "ECI द्वारा 'सक्षम' ऐप विशेष रूप से किस समूह के मतदाताओं के लिए बनाया गया है?",
+    options: ["Senior citizens above 70", "Persons with Disabilities (PwD)", "NRI voters", "First-time voters"],
+    optionsHi: ["70 वर्ष से अधिक वरिष्ठ नागरिक", "दिव्यांग व्यक्ति (PwD)", "प्रवासी भारतीय मतदाता", "पहली बार मतदाता"],
+    correctAnswerIndex: 1,
+    explanation: "The Saksham app, developed by the ECI, is specifically designed for Persons with Disabilities (PwD) to request pick-up services and assistance at polling stations.",
+    explanationHi: "ECI द्वारा विकसित सक्षम ऐप विशेष रूप से दिव्यांग व्यक्तियों के लिए बनाया गया है ताकि वे पिक-अप सेवाएं और मतदान केंद्रों पर सहायता का अनुरोध कर सकें।"
+  },
+  {
+    question: "What is 'delimitation' in Indian electoral context?",
+    questionHi: "भारतीय चुनावी संदर्भ में 'परिसीमन' क्या है?",
+    options: ["Disqualification of a candidate", "Redrawing of constituency boundaries", "Extension of election dates", "Counting of postal ballots"],
+    optionsHi: ["उम्मीदवार की अयोग्यता", "निर्वाचन क्षेत्र की सीमाओं का पुनर्निर्धारण", "चुनाव तिथियों का विस्तार", "डाक मतपत्रों की गणना"],
+    correctAnswerIndex: 1,
+    explanation: "Delimitation is the process of redrawing the boundaries of assembly or parliamentary constituencies based on the latest census data, conducted by the Delimitation Commission.",
+    explanationHi: "परिसीमन नवीनतम जनगणना के आंकड़ों के आधार पर विधानसभा या संसदीय निर्वाचन क्षेत्रों की सीमाओं को फिर से निर्धारित करने की प्रक्रिया है।"
+  },
+  {
+    question: "Under which article of the Indian Constitution is universal adult franchise guaranteed?",
+    questionHi: "भारतीय संविधान के किस अनुच्छेद के तहत सार्वभौमिक वयस्क मताधिकार की गारंटी दी गई है?",
+    options: ["Article 19", "Article 21", "Article 326", "Article 368"],
+    optionsHi: ["अनुच्छेद 19", "अनुच्छेद 21", "अनुच्छेद 326", "अनुच्छेद 368"],
+    correctAnswerIndex: 2,
+    explanation: "Article 326 of the Indian Constitution guarantees elections based on adult suffrage — every citizen aged 18 or above who is not disqualified by law has the right to vote.",
+    explanationHi: "भारतीय संविधान का अनुच्छेद 326 वयस्क मताधिकार के आधार पर चुनाव की गारंटी देता है — कानून द्वारा अयोग्य नहीं किए गए प्रत्येक 18 वर्ष या उससे अधिक आयु के नागरिक को मतदान का अधिकार है।"
+  },
+  {
+    question: "What is a 'by-poll' (by-election) in India?",
+    questionHi: "भारत में 'उपचुनाव' (by-election) क्या है?",
+    options: ["An election held alongside the general election", "An election to fill a vacancy mid-term", "An election for local bodies only", "A mock election for awareness"],
+    optionsHi: ["आम चुनाव के साथ आयोजित चुनाव", "कार्यकाल के बीच में रिक्ति भरने के लिए चुनाव", "केवल स्थानीय निकायों के लिए चुनाव", "जागरूकता के लिए एक मॉक चुनाव"],
+    correctAnswerIndex: 1,
+    explanation: "A by-election (or by-poll) is held to fill a vacancy in a constituency arising due to the death, resignation, or disqualification of an elected representative.",
+    explanationHi: "उपचुनाव किसी निर्वाचन क्षेत्र में निर्वाचित प्रतिनिधि की मृत्यु, इस्तीफे या अयोग्यता के कारण उत्पन्न रिक्ति को भरने के लिए आयोजित किया जाता है।"
+  },
+  {
+    question: "Postal ballot voting in India is primarily meant for which category of voters?",
+    questionHi: "भारत में डाक मत पत्र से मतदान मुख्य रूप से किस श्रेणी के मतदाताओं के लिए है?",
+    options: ["Voters aged above 80", "Service voters and election staff on duty", "Students studying abroad", "Voters who missed registration"],
+    optionsHi: ["80 वर्ष से अधिक आयु के मतदाता", "सेवा मतदाता और चुनाव ड्यूटी पर कर्मचारी", "विदेश में पढ़ने वाले छात्र", "जिन मतदाताओं का पंजीकरण छूट गया"],
+    correctAnswerIndex: 1,
+    explanation: "Postal ballot is primarily used by service voters (military, paramilitary, government employees posted away) and election officials on duty who cannot reach their polling station.",
+    explanationHi: "डाक मतपत्र मुख्य रूप से सेवा मतदाताओं (सैनिक, अर्धसैनिक, दूर पोस्टेड सरकारी कर्मचारी) और चुनाव ड्यूटी पर तैनात अधिकारियों द्वारा उपयोग किया जाता है।"
+  },
+  {
+    question: "How many phases did the 2019 Indian General Election take place over?",
+    questionHi: "2019 के भारतीय आम चुनाव कितने चरणों में हुए?",
+    options: ["5 phases", "6 phases", "7 phases", "9 phases"],
+    optionsHi: ["5 चरण", "6 चरण", "7 चरण", "9 चरण"],
+    correctAnswerIndex: 2,
+    explanation: "The 2019 Indian General Election (17th Lok Sabha) was conducted over 7 phases from April 11 to May 19, 2019, across all 543 constituencies.",
+    explanationHi: "2019 का भारतीय आम चुनाव (17वीं लोकसभा) 11 अप्रैल से 19 मई 2019 तक सभी 543 निर्वाचन क्षेत्रों में 7 चरणों में आयोजित हुआ था।"
+  },
+  {
+    question: "The Election Commission of India was established on which date?",
+    questionHi: "भारत निर्वाचन आयोग की स्थापना किस तिथि को हुई थी?",
+    options: ["15 August 1947", "25 January 1950", "26 January 1950", "1 March 1952"],
+    optionsHi: ["15 अगस्त 1947", "25 जनवरी 1950", "26 जनवरी 1950", "1 मार्च 1952"],
+    correctAnswerIndex: 1,
+    explanation: "The Election Commission of India was established on January 25, 1950 — one day before India became a Republic. January 25 is now celebrated as National Voters' Day.",
+    explanationHi: "भारत निर्वाचन आयोग की स्थापना 25 जनवरी 1950 को हुई — भारत के गणतंत्र बनने से एक दिन पहले। 25 जनवरी को अब राष्ट्रीय मतदाता दिवस के रूप में मनाया जाता है।"
+  },
+  {
+    question: "Which day is celebrated as 'National Voters' Day' in India?",
+    questionHi: "भारत में 'राष्ट्रीय मतदाता दिवस' किस दिन मनाया जाता है?",
+    options: ["26 January", "25 January", "15 August", "2 October"],
+    optionsHi: ["26 जनवरी", "25 जनवरी", "15 अगस्त", "2 अक्टूबर"],
+    correctAnswerIndex: 1,
+    explanation: "January 25 is celebrated as National Voters' Day (Rashtriya Matdata Diwas) in India since 2011 to mark the founding of the Election Commission of India on January 25, 1950.",
+    explanationHi: "25 जनवरी को 2011 से भारत में राष्ट्रीय मतदाता दिवस के रूप में मनाया जाता है, जो 25 जनवरी 1950 को भारत निर्वाचन आयोग की स्थापना का स्मरण दिलाता है।"
   }
 ];
+
 
 export async function seedDatabase() {
   await dbConnect();
