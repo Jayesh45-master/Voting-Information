@@ -153,19 +153,29 @@ export default function VoterAwareness() {
       printWindow.document.write('<html><head><title>Voter Awareness Certificate</title>');
       printWindow.document.write('<style>');
       printWindow.document.write(`
+        @page {
+          size: A4 landscape;
+          margin: 15mm;
+        }
+        * { box-sizing: border-box; }
         body { 
           font-family: 'Georgia', 'Times New Roman', serif; 
           background-color: #ffffff; 
           margin: 0; 
-          padding: 40px; 
+          padding: 20px; 
           display: flex; 
           justify-content: center; 
           align-items: center; 
           min-height: 100vh;
         }
         @media print {
-          body { padding: 0; }
+          body { padding: 0; margin: 0; }
           .no-print { display: none; }
+          .certificate-preview-card {
+            width: 100% !important;
+            max-width: 100% !important;
+            page-break-inside: avoid;
+          }
         }
       `);
       printWindow.document.write('</style></head><body>');
@@ -678,7 +688,7 @@ export default function VoterAwareness() {
           </div>
 
           {/* Grid Layout */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', flexWrap: 'wrap' }}>
+          <div className="rights-grid">
             
             {/* Left: Voter Rights */}
             <div>

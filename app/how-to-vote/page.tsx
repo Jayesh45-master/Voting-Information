@@ -79,13 +79,16 @@ export default function HowToVoteWizard() {
         </div>
 
         <div className="wizard-actions">
-          <button 
-            className="btn btn-outline" 
-            onClick={goPrev} 
-            disabled={currentStepIndex === 0}
-          >
-            Previous / पिछला
-          </button>
+          {currentStepIndex > 0 && (
+            <button 
+              className="btn btn-outline" 
+              onClick={goPrev}
+            >
+              Previous / पिछला
+            </button>
+          )}
+          {/* Spacer to push Next button to right when Previous is hidden */}
+          {currentStepIndex === 0 && <span />}
           
           {currentStepIndex < steps.length - 1 ? (
             <button className="btn btn-primary" onClick={goNext}>

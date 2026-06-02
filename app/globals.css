@@ -572,6 +572,13 @@ h1, h2, h3, h4, h5, h6 {
   to { transform: rotate(360deg); }
 }
 
+/* Rights & Helplines Grid */
+.rights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
 /* ========================================== */
 /*   RESPONSIVE / MOBILE-FRIENDLY BREAKPOINTS */
 /* ========================================== */
@@ -686,7 +693,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* Grid and tables layout updates */
-  .state-cards-grid, .elections-grid, .notices-grid {
+  .state-cards-grid, .elections-grid, .notices-grid, .rights-grid {
     grid-template-columns: 1fr !important;
   }
 

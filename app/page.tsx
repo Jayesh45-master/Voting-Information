@@ -246,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* Live Election News Section - Fixed in container */}
-      <section className="container" style={{ marginTop: '4rem' }}>
+      <section className="container" style={{ marginTop: '4rem', paddingBottom: '3rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
           <Award size={24} style={{ color: 'var(--secondary-color)' }} />
           <div>
