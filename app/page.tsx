@@ -282,7 +282,7 @@ export default function Home() {
       </footer>
 
       {/* Floating Chat Assistant */}
-      <AssistantWidget />
+      <AssistantWidget setActiveTab={setActiveFeatureTab} />
     </main>
   );
 }

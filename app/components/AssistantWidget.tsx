@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send } from 'lucide-react';
 
-export default function AssistantWidget() {
+export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab: 'overview' | 'live' | 'states' | 'awareness') => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState<'en' | 'hi' | null>(null);
   const [messages, setMessages] = useState<{role: string, content: string}[]>([]);
@@ -89,8 +89,75 @@ export default function AssistantWidget() {
             <>
               <div className="chat-body">
                 {messages.map((msg, index) => (
-                  <div key={index} className={`chat-message ${msg.role}`}>
-                    {msg.content}
+                  <div key={index} className={`chat-message ${msg.role}`} style={{ whiteSpace: 'pre-line' }}>
+                    {(() => {
+                      const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+                      const parts = [];
+                      let lastIndex = 0;
+                      let match;
+
+                      while ((match = regex.exec(msg.content)) !== null) {
+                        const matchIndex = match.index;
+                        if (matchIndex > lastIndex) {
+                          parts.push(msg.content.substring(lastIndex, matchIndex));
+                        }
+
+                        const text = match[1];
+                        const url = match[2];
+
+                        if (url.startsWith('tab:')) {
+                          const tabName = url.substring(4) as 'overview' | 'live' | 'states' | 'awareness';
+                          parts.push(
+                            <button
+                              key={matchIndex}
+                              onClick={() => {
+                                if (setActiveTab) {
+                                  setActiveTab(tabName);
+                                  document.getElementById('feature-tabs-section')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                              }}
+                              style={{
+                                background: 'none',
+                                border: 'none',
+                                color: 'var(--primary-color)',
+                                textDecoration: 'underline',
+                                cursor: 'pointer',
+                                padding: 0,
+                                font: 'inherit',
+                                fontWeight: 'bold',
+                                display: 'inline'
+                              }}
+                            >
+                              {text}
+                            </button>
+                          );
+                        } else {
+                          parts.push(
+                            <a
+                              key={matchIndex}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                color: 'var(--primary-color)',
+                                textDecoration: 'underline',
+                                fontWeight: 'bold'
+                              }}
+                            >
+                              {text}
+                            </a>
+                          );
+                        }
+
+                        lastIndex = regex.lastIndex;
+                      }
+
+                      if (lastIndex < msg.content.length) {
+                        parts.push(msg.content.substring(lastIndex));
+                      }
+
+                      return parts.length > 0 ? parts : msg.content;
+                    })()}
                   </div>
                 ))}
                 {isLoading && (
