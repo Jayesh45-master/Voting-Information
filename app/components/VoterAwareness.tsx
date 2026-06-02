@@ -145,47 +145,39 @@ export default function VoterAwareness() {
 
   const handlePrintCertificate = () => {
     if (!certificateRef.current) return;
-    const printContent = certificateRef.current.innerHTML;
+    const printContent = certificateRef.current.outerHTML;
     
     // Create print layout style
-    const printWindow = window.open('', '', 'height=600,width=800');
+    const printWindow = window.open('', '', 'height=750,width=900');
     if (printWindow) {
       printWindow.document.write('<html><head><title>Voter Awareness Certificate</title>');
       printWindow.document.write('<style>');
       printWindow.document.write(`
         body { 
-          font-family: 'Inter', system-ui, sans-serif; 
-          background-color: #f7fafc; 
+          font-family: 'Georgia', 'Times New Roman', serif; 
+          background-color: #ffffff; 
           margin: 0; 
-          padding: 20px; 
+          padding: 40px; 
           display: flex; 
           justify-content: center; 
           align-items: center; 
-          height: 100vh;
+          min-height: 100vh;
         }
-        .cert-container {
-          background: white;
-          border: 10px double #000080;
-          padding: 40px;
-          text-align: center;
-          width: 700px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-          position: relative;
+        @media print {
+          body { padding: 0; }
+          .no-print { display: none; }
         }
-        .title { font-size: 2.2rem; font-weight: 800; color: #000080; margin: 0; text-transform: uppercase; }
-        .subtitle { font-size: 1.2rem; color: #c25e00; font-weight: 600; margin-top: 10px; }
-        .name { font-size: 2rem; font-weight: bold; border-bottom: 2px solid #555; display: inline-block; margin: 25px 0 10px; padding-bottom: 5px; color: #333; }
-        .details { font-size: 1rem; color: #555; line-height: 1.6; margin: 20px 0; }
-        .footer-sig { display: flex; justify-content: space-between; margin-top: 40px; }
-        .sig-block { border-top: 1px solid #777; width: 180px; font-size: 0.85rem; padding-top: 5px; color: #555; }
-        .seal { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); opacity: 0.08; }
       `);
       printWindow.document.write('</style></head><body>');
       printWindow.document.write(printContent);
       printWindow.document.write('</body></html>');
       printWindow.document.close();
       printWindow.focus();
-      printWindow.print();
+      
+      // Delay printing slightly to ensure all styles are loaded in window
+      setTimeout(() => {
+        printWindow.print();
+      }, 500);
     }
   };
 
@@ -431,86 +423,112 @@ export default function VoterAwareness() {
                   {/* Certificate Preview Card */}
                   <div 
                     ref={certificateRef}
+                    className="certificate-preview-card"
                     style={{ 
                       width: '100%', 
                       maxWidth: '680px', 
-                      background: '#FFFFFF', 
-                      border: '12px double #000080', 
-                      padding: '3rem 2.5rem', 
-                      borderRadius: '8px', 
+                      background: '#F6F0E5', 
+                      border: '4px solid #8B6508', 
+                      padding: '8px', 
+                      borderRadius: '4px', 
                       boxShadow: '0 10px 40px rgba(0,0,0,0.12)', 
                       textAlign: 'center', 
                       position: 'relative',
-                      color: '#1A1A1A',
-                      fontFamily: "'Inter', sans-serif"
+                      color: '#3E2723', 
+                      fontFamily: "'Georgia', 'Times New Roman', serif"
                     }}
                   >
-                    {/* Ashoka Chakra background watermark */}
                     <div style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      opacity: 0.04,
-                      pointerEvents: 'none'
+                      border: '1px solid #8B6508',
+                      padding: '2.5rem 1.5rem',
+                      height: '100%',
+                      position: 'relative'
                     }}>
-                      <svg width="350" height="350" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#000080" strokeWidth="2" />
-                        <circle cx="50" cy="50" r="10" fill="none" stroke="#000080" strokeWidth="1" />
-                        {Array.from({ length: 24 }).map((_, i) => (
-                          <line 
-                            key={i} 
-                            x1="50" 
-                            y1="50" 
-                            x2={50 + 45 * Math.cos((i * 15 * Math.PI) / 180)} 
-                            y2={50 + 45 * Math.sin((i * 15 * Math.PI) / 180)} 
-                            stroke="#000080" 
-                            strokeWidth="0.5" 
-                          />
-                        ))}
-                      </svg>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', borderBottom: '2px solid #000080', paddingBottom: '1rem', marginBottom: '1.8rem' }}>
-                      <Award color="#000080" size={40} />
-                      <div style={{ fontSize: '1.3rem', fontWeight: 800, letterSpacing: '2px', color: '#000080' }}>CERTIFICATE OF APPRECIATION</div>
-                      <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#EF6C00', letterSpacing: '1px' }}>VOTER AWARENESS CHAMPION / मतदाता जागरूकता चैंपियन</div>
-                    </div>
-
-                    <div style={{ fontSize: '0.95rem', fontStyle: 'italic', color: '#555', marginBottom: '1.2rem' }}>
-                      This is proudly presented to
-                    </div>
-
-                    <div style={{ 
-                      fontSize: '2.2rem', 
-                      fontWeight: 800, 
-                      color: '#1A1A1A', 
-                      fontFamily: "'Playfair Display', serif", 
-                      borderBottom: '2.5px solid #000080', 
-                      display: 'inline-block',
-                      padding: '0 2rem 0.5rem',
-                      marginBottom: '1.5rem',
-                      letterSpacing: '1px'
-                    }}>
-                      {userName}
-                    </div>
-
-                    <div style={{ fontSize: '0.98rem', color: '#444', lineHeight: '1.6', maxWidth: '580px', margin: '0 auto 2rem' }}>
-                      for successfully qualifying the <strong>Voter Awareness Challenge</strong> with a score of <strong>{score}/5 ({Math.round((score / quizQuestions.length) * 100)}%)</strong>, demonstrating a comprehensive understanding of India&apos;s electoral processes, rules, and voter responsibilities.
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '1.5rem', fontSize: '0.8rem', fontWeight: 600, color: '#555' }}>
-                      <div style={{ textAlign: 'left' }}>
-                        <div>Date: {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#888', marginTop: '0.2rem' }}>Electoral Awareness Portal</div>
+                      {/* Ashoka Chakra background watermark */}
+                      <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        opacity: 0.05,
+                        pointerEvents: 'none'
+                      }}>
+                        <svg width="320" height="320" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="45" fill="none" stroke="#8B6508" strokeWidth="1.8" />
+                          <circle cx="50" cy="50" r="10" fill="none" stroke="#8B6508" strokeWidth="0.8" />
+                          {Array.from({ length: 24 }).map((_, i) => (
+                            <line 
+                              key={i} 
+                              x1="50" 
+                              y1="50" 
+                              x2={50 + 45 * Math.cos((i * 15 * Math.PI) / 180)} 
+                              y2={50 + 45 * Math.sin((i * 15 * Math.PI) / 180)} 
+                              stroke="#8B6508" 
+                              strokeWidth="0.4" 
+                            />
+                          ))}
+                        </svg>
                       </div>
-                      <div style={{ textAlign: 'center', border: '1px solid #ddd', padding: '0.3rem 0.6rem', borderRadius: '4px', background: '#f9f9f9', fontSize: '0.75rem' }}>
-                        <div style={{ color: '#000080', fontWeight: 'bold' }}>VERIFIED</div>
-                        <div style={{ fontSize: '0.65rem', color: '#666' }}>ID: {certificateId}</div>
+
+                      <div className="cert-header" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', borderBottom: '2px solid #8B6508', paddingBottom: '1rem', marginBottom: '1.8rem' }}>
+                        <Award color="#8B6508" size={40} />
+                        <div className="cert-title" style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '2px', color: '#8B0000' }}>CERTIFICATE OF APPRECIATION</div>
+                        <div className="cert-subtitle" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#3E2723', letterSpacing: '1px' }}>VOTER AWARENESS CHAMPION / मतदाता जागरूकता चैंपियन</div>
                       </div>
-                      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ fontStyle: 'italic', color: '#000080', fontSize: '1rem', fontFamily: 'cursive', fontWeight: 'normal', marginBottom: '0.25rem' }}>ECI Assistant</div>
-                        <div style={{ borderTop: '1px solid #777', width: '130px', fontSize: '0.75rem', paddingTop: '0.2rem' }}>Authorized Signatory</div>
+
+                      <div style={{ fontSize: '0.95rem', fontStyle: 'italic', color: '#5D4037', marginBottom: '1.2rem' }}>
+                        This is proudly presented to
+                      </div>
+
+                      <div 
+                        className="cert-name"
+                        style={{ 
+                          fontSize: '2.2rem', 
+                          fontWeight: 800, 
+                          color: '#1A0F0A', 
+                          fontFamily: "'Playfair Display', 'Georgia', serif", 
+                          borderBottom: '2.5px solid #8B6508', 
+                          display: 'inline-block',
+                          padding: '0 2rem 0.5rem',
+                          marginBottom: '1.5rem',
+                          letterSpacing: '1px'
+                        }}
+                      >
+                        {userName}
+                      </div>
+
+                      <div style={{ fontSize: '0.98rem', color: '#3E2723', lineHeight: '1.6', maxWidth: '580px', margin: '0 auto 2rem' }}>
+                        for successfully qualifying the <strong>Voter Awareness Challenge</strong> with a score of <strong>{score}/5 ({Math.round((score / quizQuestions.length) * 100)}%)</strong>, demonstrating a comprehensive understanding of India&apos;s electoral processes, rules, and voter responsibilities.
+                      </div>
+
+                      <div className="cert-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '1.5rem', fontSize: '0.8rem', fontWeight: 600, color: '#5D4037', gap: '1rem' }}>
+                        <div className="cert-date" style={{ textAlign: 'left' }}>
+                          <div>Date: {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+                          <div style={{ fontSize: '0.75rem', color: '#8B7355', marginTop: '0.2rem' }}>Electoral Awareness Portal</div>
+                        </div>
+                        
+                        <div className="cert-verified-stamp" style={{ 
+                          textAlign: 'center', 
+                          border: '2px dashed #8B0000', 
+                          padding: '0.4rem 0.8rem', 
+                          borderRadius: '4px', 
+                          background: 'rgba(139,0,0,0.03)', 
+                          fontSize: '0.8rem', 
+                          color: '#8B0000',
+                          fontWeight: 'bold',
+                          letterSpacing: '1px',
+                          transform: 'rotate(-4deg)',
+                          boxShadow: '0 2px 5px rgba(139,0,0,0.05)',
+                          alignSelf: 'center'
+                        }}>
+                          <div style={{ color: '#8B0000', fontWeight: 'bold' }}>VERIFIED</div>
+                          <div style={{ fontSize: '0.65rem', color: '#8B0000', opacity: 0.8 }}>ID: {certificateId}</div>
+                        </div>
+
+                        <div className="cert-signature-block" style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                          <div style={{ fontStyle: 'italic', color: '#8B6508', fontSize: '1.2rem', fontFamily: 'cursive', fontWeight: 'normal', marginBottom: '0.25rem' }}>ECI Assistant</div>
+                          <div style={{ borderTop: '1px solid #8B6508', width: '130px', fontSize: '0.75rem', paddingTop: '0.2rem', color: '#8B7355' }}>Authorized Signatory</div>
+                        </div>
                       </div>
                     </div>
                   </div>

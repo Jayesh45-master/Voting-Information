@@ -571,3 +571,179 @@ h1, h2, h3, h4, h5, h6 {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* ========================================== */
+/*   RESPONSIVE / MOBILE-FRIENDLY BREAKPOINTS */
+/* ========================================== */
+
+@media (max-width: 992px) {
+  .notices-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Container layout padding */
+  .container {
+    padding: 0 15px !important;
+  }
+
+  /* Hero adjustments */
+  .hero {
+    padding: 3rem 1rem !important;
+  }
+  .hero h1 {
+    font-size: 2.2rem !important;
+  }
+  .hero span {
+    font-size: 1.4rem !important;
+  }
+  .hero p {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Notices/News Grid stacking */
+  .notices-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Horizontal Scroll for Navigation Tabs */
+  #feature-tabs-section {
+    margin-top: -1.5rem !important;
+  }
+  #feature-tabs-section .glass-panel {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+    padding: 0.6rem !important;
+    scrollbar-width: none !important; /* Hide scrollbar Firefox */
+    -webkit-overflow-scrolling: touch !important;
+  }
+  #feature-tabs-section .glass-panel::-webkit-scrollbar {
+    display: none !important; /* Hide scrollbar Chrome/Safari */
+  }
+  #feature-tabs-section .glass-panel button {
+    flex: 0 0 auto !important;
+    min-width: 140px !important;
+    padding: 0.6rem 1rem !important;
+  }
+
+  /* Vertical Timeline for Mobile screens */
+  .timeline::before {
+    left: 20px !important;
+  }
+  .timeline-item {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .timeline-item:nth-child(odd) {
+    flex-direction: row !important;
+  }
+  .timeline-content {
+    width: calc(100% - 50px) !important;
+    margin-left: 40px !important;
+  }
+  .timeline-dot {
+    left: 20px !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Wizard / Voting Guide responsiveness */
+  .wizard-container {
+    margin: 1.5rem auto !important;
+    padding: 1.5rem 1.2rem !important;
+    border-radius: 8px !important;
+  }
+  .wizard-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  .wizard-actions {
+    margin-top: 2rem !important;
+    gap: 0.8rem !important;
+  }
+
+  /* Chat widget adjustments on mobile */
+  .chat-widget {
+    bottom: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    height: calc(100vh - 20px) !important;
+    max-height: 520px !important;
+    border-radius: 12px !important;
+  }
+  .chat-toggle {
+    bottom: 15px !important;
+    right: 15px !important;
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  /* Grid and tables layout updates */
+  .state-cards-grid, .elections-grid, .notices-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Table Horizontal Scrolling container */
+  .responsive-table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Vintage Certificate Responsive updates */
+  .certificate-preview-card {
+    padding: 4px !important; /* reduce outer padding spacing */
+  }
+  .certificate-preview-card > div {
+    padding: 1.5rem 1rem !important; /* reduce inner padding */
+  }
+  .cert-title {
+    font-size: 1.1rem !important;
+    letter-spacing: 1px !important;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem !important;
+  }
+  .cert-name {
+    font-size: 1.6rem !important;
+    padding: 0 1rem 0.25rem !important;
+  }
+  .cert-footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.2rem !important;
+    text-align: center !important;
+  }
+  .cert-date, .cert-signature-block {
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem !important;
+  }
+  .hero span {
+    font-size: 1.1rem !important;
+  }
+  .btn {
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+  }
+  .wizard-actions {
+    flex-direction: column !important;
+  }
+  .wizard-actions button, .wizard-actions a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}

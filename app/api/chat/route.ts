@@ -119,7 +119,11 @@ export async function POST(request: Request) {
       // System instructions for Gemini
       const systemInstruction = `You are the Official Election Assistant, a friendly, knowledgeable, and extremely precise assistant for the Indian Voter Information Portal.
 Your job is to answer the user's questions about elections in India, voting eligibility, rules, and process.
-Keep your answers helpful, concise, and structured. Use bullet points if listing steps.
+Keep your answers helpful, concise, and structured.
+
+CRITICAL FORMATTING INSTRUCTIONS:
+- Do NOT use any asterisks or stars (like '*' or '**') in your responses. Avoid raw markdown bold markers. Use standard capitalization or spacing for emphasis.
+- If you explain anything step-by-step or list multiple items, you MUST format them as a numbered list starting with "1. ", "2. ", "3. " instead of bullet points, stars, or hyphens.
 
 Language instructions:
 - Respond in English if the user asks in English or has language 'en'.
@@ -127,7 +131,7 @@ Language instructions:
 
 PORTAL DATA CONTEXT (Use this to answer questions about specific states):
 1. West Bengal Assembly Election 2026 (Completed):
-   - Winner: Bharatiya Janata Party (BJP) with 208 seats.
+   - Winner: BJP with 208 seats.
    - Runner-up: All India Trinamool Congress (AITC) with 80 seats.
    - Chief Minister: Suvendu Adhikari.
 2. Uttar Pradesh Assembly Election 2027 (Upcoming):
@@ -212,7 +216,11 @@ Always keep the link target lowercase and exactly as specified (e.g. 'tab:states
 
         if (response.ok) {
           const data = await response.json();
-          const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          
+          // Programmatic cleaning of any remaining raw asterisks/stars
+          reply = reply.replace(/\*/g, '');
+          
           if (reply.trim()) {
             return NextResponse.json({ reply }, { status: 200 });
           }
@@ -230,37 +238,37 @@ Always keep the link target lowercase and exactly as specified (e.g. 'tab:states
     
     if (language === 'hi') {
       if (matchedGlossary.length > 0) {
-        reply = `यहाँ **${matchedGlossary[0].termHi}** की परिभाषा दी गई है:\n${matchedGlossary[0].definitionHi}\n\nआप [मतदाता शब्दावली (Electoral Glossary)](tab:awareness) में अधिक शब्दावली देख सकते हैं।`;
+        reply = `यहाँ ${matchedGlossary[0].termHi} की परिभाषा दी गई है:\n\n${matchedGlossary[0].definitionHi}\n\nआप [मतदाता शब्दावली (Electoral Glossary)](tab:awareness) में अधिक शब्दावली देख सकते हैं।`;
       } else if (matchedFaqs.length > 0) {
-        reply = matchedFaqs[0].faq.answerHi;
+        reply = matchedFaqs[0].faq.answerHi.replace(/\*/g, '');
       } else if (matchedStates.length > 0) {
         const se = matchedStates[0];
-        reply = `**${se.stateNameHi} विधानसभा चुनाव (${se.year})**:\n`;
-        reply += `- **स्थिति**: ${se.status === 'Completed' ? 'पूर्ण' : 'आगामी'}\n`;
-        reply += `- **कुल सीटें**: ${se.totalSeats}\n`;
-        reply += `- **चरण (Phases)**: ${se.phases}\n`;
-        reply += `- **समय सीमा/तारीख**: ${se.dateRangeHi}\n`;
+        reply = `${se.stateNameHi} विधानसभा चुनाव (${se.year}):\n`;
+        reply += `1. स्थिति: ${se.status === 'Completed' ? 'पूर्ण' : 'आगामी'}\n`;
+        reply += `2. कुल सीटें: ${se.totalSeats}\n`;
+        reply += `3. चरण: ${se.phases}\n`;
+        reply += `4. समय सीमा/तारीख: ${se.dateRangeHi}\n`;
         
         const stateResults = results.filter((r: any) => r.stateName === se.stateName);
         if (stateResults.length > 0) {
-          reply += `\n**चुनाव परिणाम**:\n`;
-          stateResults.forEach((r: any) => {
-            reply += `- ${r.partyNameHi}: ${r.seatsWon} सीटें (वोट शेयर: ${r.voteShare})\n`;
+          reply += `\nचुनाव परिणाम:\n`;
+          stateResults.forEach((r: any, idx: number) => {
+            reply += `${idx + 1}. ${r.partyNameHi}: ${r.seatsWon} सीटें (वोट शेयर: ${r.voteShare})\n`;
           });
         }
         reply += `\nअधिक विवरण के लिए, [राज्य विधानसभा चुनाव](tab:states) टैब देखें।`;
       } else if (isTimelineRelated) {
         const timeline = await TimelineEvent.find({});
         reply = `यहाँ आगामी चुनाव की समय सीमा (Timeline) दी गई है:\n\n`;
-        timeline.forEach((t: any) => {
-          reply += `- **${t.titleHi}**: ${new Date(t.date).toLocaleDateString('hi-IN')} - ${t.descriptionHi}\n`;
+        timeline.forEach((t: any, idx: number) => {
+          reply += `${idx + 1}. ${t.titleHi}: ${new Date(t.date).toLocaleDateString('hi-IN')} - ${t.descriptionHi}\n`;
         });
         reply += `\nआप इन विवरणों को [महत्वपूर्ण समय सीमा](tab:overview) में देख सकते हैं।`;
       } else if (isStepsRelated) {
         const steps = await VotingStep.find({});
         reply = `मतदान करने के लिए आवश्यक चरण (Voting Steps) और दिशानिर्देश:\n\n`;
         steps.sort((a: any, b: any) => a.stepNumber - b.stepNumber).forEach((s: any) => {
-          reply += `${s.stepNumber}. **${s.titleHi}**: ${s.descriptionHi}\n`;
+          reply += `${s.stepNumber}. ${s.titleHi}: ${s.descriptionHi}\n`;
         });
         reply += `\nअधिक जानकारी के लिए [मतदान दिशानिर्देश](/how-to-vote) देखें।`;
       } else if (isQuizRelated) {
@@ -269,50 +277,50 @@ Always keep the link target lowercase and exactly as specified (e.g. 'tab:states
         reply = `नमस्ते! मैं आपका मतदाता सहायक हूँ। मैं मतदान प्रक्रिया, पंजीकरण, राज्यों के चुनाव और पोर्टल के विभिन्न फीचर्स के बारे में आपके प्रश्नों का उत्तर दे सकता हूँ।
         
 यहाँ कुछ चीजें हैं जो आप कर सकते हैं:
-- **राज्य चुनाव परिणाम और आगामी विवरण**: [राज्य विधानसभा चुनाव](tab:states) पर जाएं।
-- **मॉक पोलिंग का प्रयास करें (उत्तर प्रदेश विधानसभा चुनाव सिम्युलेटर)**: [लाइव काउंटिंग सिम्युलेटर](tab:live) पर जाएं।
-- **क्विज खेलें और सर्टिफिकेट पाएं**: [मतदाता क्विज और प्रमाण पत्र](tab:awareness) देखें।
-- **शब्दावली (जैसे EVM, VVPAT, MCC)**: [मतदाता शब्दावली](tab:awareness) देखें।
-- **मतदान करने की गाइड**: [मतदान दिशानिर्देश](/how-to-vote) पढ़ें।
-- **अंतिम तिथियां**: [महत्वपूर्ण समय सीमा](tab:overview) पर जाएं।
-- **आधिकारिक पंजीकरण**: [चुनाव आयोग पोर्टल (ECI)](https://voters.eci.gov.in) पर जाएं।
+1. राज्य चुनाव परिणाम और आगामी विवरण: [राज्य विधानसभा चुनाव](tab:states) पर जाएं।
+2. मॉक पोलिंग का प्रयास करें (उत्तर प्रदेश विधानसभा चुनाव सिम्युलेटर): [लाइव काउंटिंग सिम्युलेटर](tab:live) पर जाएं।
+3. क्विज खेलें और सर्टिफिकेट पाएं: [मतदाता क्विज और प्रमाण पत्र](tab:awareness) देखें।
+4. शब्दावली (जैसे EVM, VVPAT, MCC): [मतदाता शब्दावली](tab:awareness) देखें।
+5. मतदान करने की गाइड: [मतदान दिशानिर्देश](/how-to-vote) पढ़ें।
+6. अंतिम तिथियां: [महत्वपूर्ण समय सीमा](tab:overview) पर जाएं।
+7. आधिकारिक पंजीकरण: [चुनाव आयोग पोर्टल (ECI)](https://voters.eci.gov.in) पर जाएं।
 
 कृपया अपना प्रश्न पूछें, मैं उत्तर देने के लिए तैयार हूँ!`;
       }
     } else {
       // English fallback
       if (matchedGlossary.length > 0) {
-        reply = `Here is the definition for **${matchedGlossary[0].term}**:\n${matchedGlossary[0].definition}\n\nYou can explore more terms in the [Electoral Glossary](tab:awareness).`;
+        reply = `Here is the definition for ${matchedGlossary[0].term}:\n\n${matchedGlossary[0].definition}\n\nYou can explore more terms in the [Electoral Glossary](tab:awareness).`;
       } else if (matchedFaqs.length > 0) {
-        reply = matchedFaqs[0].faq.answer;
+        reply = matchedFaqs[0].faq.answer.replace(/\*/g, '');
       } else if (matchedStates.length > 0) {
         const se = matchedStates[0];
-        reply = `**${se.stateName} Assembly Election (${se.year})**:\n`;
-        reply += `- **Status**: ${se.status}\n`;
-        reply += `- **Total Seats**: ${se.totalSeats}\n`;
-        reply += `- **Phases**: ${se.phases}\n`;
-        reply += `- **Schedule**: ${se.dateRange}\n`;
+        reply = `${se.stateName} Assembly Election (${se.year}):\n`;
+        reply += `1. Status: ${se.status}\n`;
+        reply += `2. Total Seats: ${se.totalSeats}\n`;
+        reply += `3. Phases: ${se.phases}\n`;
+        reply += `4. Schedule: ${se.dateRange}\n`;
         
         const stateResults = results.filter((r: any) => r.stateName === se.stateName);
         if (stateResults.length > 0) {
-          reply += `\n**Election Results**:\n`;
-          stateResults.forEach((r: any) => {
-            reply += `- ${r.partyName}: ${r.seatsWon} seats (Vote share: ${r.voteShare})\n`;
+          reply += `\nElection Results:\n`;
+          stateResults.forEach((r: any, idx: number) => {
+            reply += `${idx + 1}. ${r.partyName}: ${r.seatsWon} seats (Vote share: ${r.voteShare})\n`;
           });
         }
         reply += `\nFor more details, check out the [State Assembly Elections](tab:states) tab.`;
       } else if (isTimelineRelated) {
         const timeline = await TimelineEvent.find({});
         reply = `Here is the election timeline and key dates:\n\n`;
-        timeline.forEach((t: any) => {
-          reply += `- **${t.title}**: ${new Date(t.date).toDateString()} - ${t.description}\n`;
+        timeline.forEach((t: any, idx: number) => {
+          reply += `${idx + 1}. ${t.title}: ${new Date(t.date).toDateString()} - ${t.description}\n`;
         });
         reply += `\nCheck [Important Deadlines](tab:overview) for details.`;
       } else if (isStepsRelated) {
         const steps = await VotingStep.find({});
         reply = `Here are the steps to cast your vote:\n\n`;
         steps.sort((a: any, b: any) => a.stepNumber - b.stepNumber).forEach((s: any) => {
-          reply += `${s.stepNumber}. **${s.title}**: ${s.description}\n`;
+          reply += `${s.stepNumber}. ${s.title}: ${s.description}\n`;
         });
         reply += `\nRead the full [How to Vote Guide](/how-to-vote) for details.`;
       } else if (isQuizRelated) {
@@ -321,13 +329,13 @@ Always keep the link target lowercase and exactly as specified (e.g. 'tab:states
         reply = `Hello! I am your Election Assistant. I can help answer your questions about voting, registrations, elections, and the portal.
         
 Here are some helpful links to guide you:
-- **Check Schedules and Results**: Visit [State Assembly Elections](tab:states).
-- **Try Mock Voting**: Go to the [Live Counting Simulator](tab:live).
-- **Play the Quiz & get a Certificate**: Check out [Voter Quiz & Certificate](tab:awareness).
-- **Glossary of Terms (EVM, VVPAT, MCC)**: Look at [Electoral Glossary](tab:awareness).
-- **Step-by-Step Voting Guide**: Read the [How to Vote Guide](/how-to-vote).
-- **Check Deadlines**: Look at [Important Deadlines](tab:overview).
-- **Register to Vote**: Visit the [Official ECI Portal](https://voters.eci.gov.in).
+1. Check Schedules and Results: Visit [State Assembly Elections](tab:states).
+2. Try Mock Voting: Go to the [Live Counting Simulator](tab:live).
+3. Play the Quiz & get a Certificate: Check out [Voter Quiz & Certificate](tab:awareness).
+4. Glossary of Terms (EVM, VVPAT, MCC): Look at [Electoral Glossary](tab:awareness).
+5. Step-by-Step Voting Guide: Read the [How to Vote Guide](/how-to-vote).
+6. Check Deadlines: Look at [Important Deadlines](tab:overview).
+7. Register to Vote: Visit the [Official ECI Portal](https://voters.eci.gov.in).
 
 Please ask any specific question and I'll do my best to answer!`;
       }

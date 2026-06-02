@@ -21,7 +21,8 @@ export default function NewsSection() {
         const res = await fetch('/api/news');
         if (res.ok) {
           const data = await res.json();
-          setNews(data);
+          const sortedNews = data.sort((a: News, b: News) => new Date(b.date).getTime() - new Date(a.date).getTime());
+          setNews(sortedNews);
         }
       } catch (error) {
         console.error('Error fetching news', error);

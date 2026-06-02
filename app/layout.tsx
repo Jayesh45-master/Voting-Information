@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-heading" });
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ["latin"], variable: "--font-body" });
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${roboto.variable}`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

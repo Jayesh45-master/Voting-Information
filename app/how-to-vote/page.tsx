@@ -55,7 +55,7 @@ export default function HowToVoteWizard() {
   };
 
   return (
-    <main style={{ paddingBottom: '4rem' }}>
+    <main style={{ minHeight: 'calc(100vh - 200px)', padding: '2rem 1rem 0' }}>
       <div className="wizard-container">
         <div className="wizard-header">
           <h2>How to Vote / मतदान कैसे करें</h2>
