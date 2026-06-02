@@ -579,6 +579,10 @@ h1, h2, h3, h4, h5, h6 {
   gap: 2rem;
 }
 
+/* Awareness Sub-Tabs */
+.tab-label-short { display: none; }
+.tab-label-full  { display: inline; }
+
 /* ========================================== */
 /*   RESPONSIVE / MOBILE-FRIENDLY BREAKPOINTS */
 /* ========================================== */
@@ -740,7 +744,8 @@ h1, h2, h3, h4, h5, h6 {
   .hero span {
     font-size: 1.1rem !important;
   }
-  .btn {
+  /* Global btn mobile — but NOT for awareness tabs which need their own layout */
+  .btn:not(.awareness-tab-btn) {
     width: 100% !important;
     text-align: center !important;
     margin-bottom: 0.5rem !important;
@@ -753,4 +758,27 @@ h1, h2, h3, h4, h5, h6 {
     width: 100% !important;
     text-align: center !important;
   }
+
+  /* Awareness tabs — always 3 in a row on mobile */
+  .awareness-tabs {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 0.4rem !important;
+    justify-items: center;
+  }
+  .awareness-tab-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.5rem 0.4rem !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    text-align: center !important;
+  }
+  .tab-label-full { display: none !important; }
+  .tab-label-short { display: inline !important; font-size: 0.72rem; }
 }
+

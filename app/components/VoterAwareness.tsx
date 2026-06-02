@@ -370,30 +370,33 @@ export default function VoterAwareness() {
     <div className="card glass-panel" style={{ padding: '2rem', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '16px' }}>
       
       {/* Sub tabs navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.2rem', marginBottom: '2rem' }}>
+      <div className="awareness-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', flexWrap: 'wrap', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.2rem', marginBottom: '2rem' }}>
         <button 
           onClick={() => handleTabChange('quiz')}
-          className={`btn ${activeSubTab === 'quiz' ? 'btn-primary' : 'btn-outline'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}
+          className={`btn awareness-tab-btn ${activeSubTab === 'quiz' ? 'btn-primary' : 'btn-outline'}`}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', padding: '0.6rem 1rem' }}
         >
-          <Award size={18} />
-          <span>Voter Quiz & Certificate / जागरूकता क्विज</span>
+          <Award size={16} />
+          <span className="tab-label-full">Voter Quiz &amp; Certificate</span>
+          <span className="tab-label-short">Quiz &amp; Cert</span>
         </button>
         <button 
           onClick={() => handleTabChange('glossary')}
-          className={`btn ${activeSubTab === 'glossary' ? 'btn-primary' : 'btn-outline'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}
+          className={`btn awareness-tab-btn ${activeSubTab === 'glossary' ? 'btn-primary' : 'btn-outline'}`}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', padding: '0.6rem 1rem' }}
         >
-          <BookOpen size={18} />
-          <span>Electoral Glossary / चुनाव शब्दावली</span>
+          <BookOpen size={16} />
+          <span className="tab-label-full">Electoral Glossary</span>
+          <span className="tab-label-short">Glossary</span>
         </button>
         <button 
           onClick={() => handleTabChange('rights')}
-          className={`btn ${activeSubTab === 'rights' ? 'btn-primary' : 'btn-outline'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}
+          className={`btn awareness-tab-btn ${activeSubTab === 'rights' ? 'btn-primary' : 'btn-outline'}`}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', padding: '0.6rem 1rem' }}
         >
-          <ShieldCheck size={18} />
-          <span>Voter Rights & Helplines / मतदाता अधिकार</span>
+          <ShieldCheck size={16} />
+          <span className="tab-label-full">Voter Rights &amp; Helplines</span>
+          <span className="tab-label-short">Rights</span>
         </button>
       </div>
 
