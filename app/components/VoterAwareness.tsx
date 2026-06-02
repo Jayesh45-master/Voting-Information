@@ -144,51 +144,226 @@ export default function VoterAwareness() {
   };
 
   const handlePrintCertificate = () => {
-    if (!certificateRef.current) return;
-    const printContent = certificateRef.current.outerHTML;
-    
-    // Create print layout style
-    const printWindow = window.open('', '', 'height=750,width=900');
-    if (printWindow) {
-      printWindow.document.write('<html><head><title>Voter Awareness Certificate</title>');
-      printWindow.document.write('<style>');
-      printWindow.document.write(`
-        @page {
-          size: A4 landscape;
-          margin: 15mm;
-        }
-        * { box-sizing: border-box; }
-        body { 
-          font-family: 'Georgia', 'Times New Roman', serif; 
-          background-color: #ffffff; 
-          margin: 0; 
-          padding: 20px; 
-          display: flex; 
-          justify-content: center; 
-          align-items: center; 
-          min-height: 100vh;
-        }
-        @media print {
-          body { padding: 0; margin: 0; }
-          .no-print { display: none; }
-          .certificate-preview-card {
-            width: 100% !important;
-            max-width: 100% !important;
-            page-break-inside: avoid;
-          }
-        }
-      `);
-      printWindow.document.write('</style></head><body>');
-      printWindow.document.write(printContent);
-      printWindow.document.write('</body></html>');
-      printWindow.document.close();
-      printWindow.focus();
-      
-      // Delay printing slightly to ensure all styles are loaded in window
-      setTimeout(() => {
-        printWindow.print();
-      }, 500);
+    const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    const percentage = Math.round((score / quizQuestions.length) * 100);
+
+    const printWindow = window.open('', '_blank', 'width=1000,height=720');
+    if (!printWindow) return;
+
+    printWindow.document.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Voter Awareness Certificate - ${userName}</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+    .cert-outer {
+      width: 100%;
+      max-width: 250mm;
+      background: #F6F0E5;
+      border: 4px solid #8B6508;
+      padding: 8px;
+      border-radius: 4px;
+      text-align: center;
+      color: #3E2723;
+    }
+    .cert-inner {
+      border: 1px solid #8B6508;
+      padding: 30px 40px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Watermark chakra */
+    .watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.05;
+      pointer-events: none;
+      width: 260px; height: 260px;
+    }
+    /* Header */
+    .cert-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 2px solid #8B6508;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    .cert-medal svg { display: block; }
+    .cert-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #8B0000;
+      text-transform: uppercase;
+    }
+    .cert-subtitle {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #3E2723;
+      letter-spacing: 1px;
+    }
+    /* Body */
+    .cert-presented {
+      font-size: 0.92rem;
+      font-style: italic;
+      color: #5D4037;
+      margin-bottom: 10px;
+    }
+    .cert-name {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #1A0F0A;
+      font-family: 'Georgia', serif;
+      border-bottom: 2.5px solid #8B6508;
+      display: inline-block;
+      padding: 0 2rem 6px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .cert-body-text {
+      font-size: 0.93rem;
+      color: #3E2723;
+      line-height: 1.55;
+      max-width: 520px;
+      margin: 0 auto 18px;
+    }
+    /* Footer */
+    .cert-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #5D4037;
+      gap: 1rem;
+    }
+    .cert-date { text-align: left; }
+    .cert-date .portal-label { font-size: 0.72rem; color: #8B7355; margin-top: 3px; }
+    .cert-stamp {
+      text-align: center;
+      border: 2px dashed #8B0000;
+      padding: 5px 10px;
+      border-radius: 4px;
+      background: rgba(139,0,0,0.03);
+      font-size: 0.78rem;
+      color: #8B0000;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transform: rotate(-4deg);
+    }
+    .cert-stamp .stamp-id { font-size: 0.62rem; opacity: 0.8; }
+    .cert-signature {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cert-sig-name {
+      font-style: italic;
+      color: #8B6508;
+      font-size: 1.15rem;
+      font-family: cursive;
+      font-weight: normal;
+      margin-bottom: 4px;
+    }
+    .cert-sig-line {
+      border-top: 1px solid #8B6508;
+      width: 130px;
+      font-size: 0.72rem;
+      padding-top: 3px;
+      color: #8B7355;
+      text-align: center;
+    }
+    @media print {
+      body { padding: 0; }
+      .cert-outer { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cert-outer">
+    <div class="cert-inner">
+      <!-- Watermark SVG Chakra -->
+      <svg class="watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#8B6508" stroke-width="1.8"/>
+        <circle cx="50" cy="50" r="10" fill="none" stroke="#8B6508" stroke-width="0.8"/>
+        ${Array.from({ length: 24 }, (_, i) => {
+          const angle = (i * 15 * Math.PI) / 180;
+          const x2 = (50 + 45 * Math.cos(angle)).toFixed(2);
+          const y2 = (50 + 45 * Math.sin(angle)).toFixed(2);
+          return `<line x1="50" y1="50" x2="${x2}" y2="${y2}" stroke="#8B6508" stroke-width="0.4"/>`;
+        }).join('')}
+      </svg>
+
+      <!-- Header -->
+      <div class="cert-header">
+        <!-- Medal/Award SVG icon replacing Lucide Award -->
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8B6508" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="7"/>
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+        </svg>
+        <div class="cert-title">Certificate of Appreciation</div>
+        <div class="cert-subtitle">VOTER AWARENESS CHAMPION / मतदाता जागरूकता चैंपियन</div>
+      </div>
+
+      <!-- Body -->
+      <p class="cert-presented">This is proudly presented to</p>
+      <div class="cert-name">${userName}</div>
+      <div class="cert-body-text">
+        for successfully qualifying the <strong>Voter Awareness Challenge</strong> with a score of
+        <strong>${score}/${quizQuestions.length} (${percentage}%)</strong>,
+        demonstrating a comprehensive understanding of India's electoral processes, rules, and voter responsibilities.
+      </div>
+
+      <!-- Footer -->
+      <div class="cert-footer">
+        <div class="cert-date">
+          <div>Date: ${today}</div>
+          <div class="portal-label">Electoral Awareness Portal</div>
+        </div>
+        <div class="cert-stamp">
+          <div>VERIFIED</div>
+          <div class="stamp-id">ID: ${certificateId}</div>
+        </div>
+        <div class="cert-signature">
+          <div class="cert-sig-name">ECI Assistant</div>
+          <div class="cert-sig-line">Authorized Signatory</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() { window.print(); }, 400);
+    };
+  </script>
+</body>
+</html>`);
+    printWindow.document.close();
   };
 
   return (
