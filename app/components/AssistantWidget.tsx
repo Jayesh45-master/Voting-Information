@@ -83,7 +83,7 @@ export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab:
           </div>
           
           {!language ? (
-            <div className="chat-body" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '1.5rem', background: 'white' }}>
+            <div className="chat-body" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '1.5rem', background: 'var(--chat-bg-assistant)' }}>
               <div style={{ display: 'inline-flex', padding: '1rem', borderRadius: '50%', background: 'rgba(239,108,0,0.08)', color: 'var(--primary-color)' }}>
                 <MessageSquare size={36} />
               </div>
