@@ -3,7 +3,8 @@
 
 An interactive, responsive, and bilingual (English & Hindi) web portal designed to educate citizens about the democratic process, provide real-time updates on upcoming and completed state assembly elections, and assist voters via an AI-powered chat assistant.
 
-🔗 **Development GitHub Repository:** [Jayesh45-master/Voting-Information](https://github.com/Jayesh45-master/Voting-Information)
+🔗 **Development GitHub Repository:** [Jayesh45-master/Voting-Information](https://github.com/Jayesh45-master/Voting-Information)  
+🚀 **Live Production Deployment:** [https://voting-information.vercel.app/](https://voting-information.vercel.app/)
 
 ---
 
@@ -58,7 +59,9 @@ An interactive 5-question bilingual quiz. Scoring 80% or higher generates a cust
 
 ### Prerequisites
 *   [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
-*   [MongoDB](https://www.mongodb.com/) (running locally or a cloud MongoDB Atlas connection URI)
+*   [MongoDB](https://www.mongodb.com/) (Must be installed locally or set up via MongoDB Atlas)
+    *   **Local Setup:** Install [MongoDB Community Server](https://www.mongodb.com/try/download/community) and ensure it is running on port `27017` (default).
+    *   **Cloud Setup:** Register for a free database on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and copy the application connection string.
 
 ### 1. Clone the Repository
 ```bash
@@ -81,7 +84,7 @@ MONGODB_URI=mongodb://127.0.0.1:27017/voting_assistant
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
 
 # Google Analytics Measurement ID (Optional)
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-NLPM4R1CXT
+NEXT_PUBLIC_GA_MEASUREMENT_ID=YOUR_GA_MEASUREMENT_ID_HERE
 ```
 
 ### 4. Seed the Database
