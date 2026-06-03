@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Calendar, MapPin, BarChart2, CheckCircle2, ExternalLink } from 'lucide-react';
+import * as analytics from '../../lib/analytics';
 
 type StateElectionData = {
   _id: string;
@@ -77,7 +78,10 @@ export default function StateElectionsDashboard() {
       {/* Tabs selector */}
       <div style={{ display: 'flex', borderBottom: '2px solid var(--border-color)', marginBottom: '2rem' }}>
         <button 
-          onClick={() => setActiveTab('upcoming')}
+          onClick={() => {
+            setActiveTab('upcoming');
+            analytics.event('view_dashboard_tab', { category: 'Dashboard', label: 'upcoming' });
+          }}
           style={{
             flex: 1,
             padding: '1rem',
@@ -101,7 +105,10 @@ export default function StateElectionsDashboard() {
           </div>
         </button>
         <button 
-          onClick={() => setActiveTab('recent')}
+          onClick={() => {
+            setActiveTab('recent');
+            analytics.event('view_dashboard_tab', { category: 'Dashboard', label: 'recent' });
+          }}
           style={{
             flex: 1,
             padding: '1rem',
@@ -209,7 +216,10 @@ export default function StateElectionsDashboard() {
             {completedElections.map(el => (
               <button
                 key={el._id}
-                onClick={() => setSelectedResultState(el.stateName)}
+                onClick={() => {
+                  setSelectedResultState(el.stateName);
+                  analytics.event('select_state_results', { category: 'Dashboard', label: el.stateName });
+                }}
                 style={{
                   padding: '0.5rem 1.2rem',
                   borderRadius: '20px',

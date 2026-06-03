@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send } from 'lucide-react';
+import * as analytics from '../../lib/analytics';
 
 export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab: 'overview' | 'live' | 'states' | 'awareness') => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,10 @@ export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab:
 
   const handleLanguageSelect = (lang: 'en' | 'hi') => {
     setLanguage(lang);
+    analytics.event('select_language', {
+      category: 'Chatbot',
+      label: lang,
+    });
     const welcomeMsg = lang === 'en' 
       ? 'Hello! I am the Official Election Assistant. How can I help you today?'
       : 'नमस्ते! मैं आधिकारिक चुनाव सहायक हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?';
@@ -35,6 +40,12 @@ export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab:
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
+
+    // Track user message sent to the chatbot
+    analytics.event('send_chat_message', {
+      category: 'Chatbot',
+      label: language,
+    });
 
     try {
       const response = await fetch('/api/chat', {
@@ -60,7 +71,12 @@ export default function AssistantWidget({ setActiveTab }: { setActiveTab?: (tab:
       {!isOpen && (
         <button 
           className="chat-toggle" 
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setIsOpen(true);
+            analytics.event('open_chatbot', {
+              category: 'Chatbot',
+            });
+          }}
           aria-label="Open election assistant"
         >
           <MessageSquare size={28} />

@@ -5,6 +5,7 @@ import {
   BookOpen, Award, CheckCircle2, XCircle, AlertCircle, 
   Phone, ShieldAlert, Search, ArrowRight, RotateCcw, Download, ExternalLink, ShieldCheck 
 } from 'lucide-react';
+import * as analytics from '../../lib/analytics';
 
 interface GlossaryTerm {
   _id: string;
@@ -105,6 +106,9 @@ export default function VoterAwareness() {
     setIsAnswerSubmitted(false);
     setScore(0);
     setQuizFinished(false);
+    analytics.event('start_quiz', {
+      category: 'Quiz',
+    });
   };
 
   const handleSelectOption = (index: number) => {
@@ -130,6 +134,11 @@ export default function VoterAwareness() {
       setQuizFinished(true);
       const randomId = "VA-" + Math.random().toString(36).substring(2, 9).toUpperCase();
       setCertificateId(randomId);
+      analytics.event('finish_quiz', {
+        category: 'Quiz',
+        value: score,
+        label: userName,
+      });
     }
   };
 
@@ -147,6 +156,12 @@ export default function VoterAwareness() {
   const handlePrintCertificate = () => {
     const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
     const percentage = Math.round((score / quizQuestions.length) * 100);
+
+    analytics.event('print_certificate', {
+      category: 'Certificate',
+      label: userName,
+      value: percentage,
+    });
 
     const printWindow = window.open('', '_blank', 'width=1000,height=720');
     if (!printWindow) return;
@@ -938,7 +953,7 @@ export default function VoterAwareness() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-main)' }}>Voter Helpline Number: 1950</div>
-                      <a href="tel:1950" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>Call</a>
+                      <a href="tel:1950" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }} onClick={() => analytics.event('call_helpline', { category: 'Helpline', label: '1950' })}>Call</a>
                     </div>
                     <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                       Toll-free national citizen helpline. Call for details about registration, EPIC cards, polling booths, and election schedules.
@@ -954,7 +969,7 @@ export default function VoterAwareness() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-main)' }}>cVIGIL Mobile App</div>
-                      <a href="https://cvigil.eci.gov.in/" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                      <a href="https://cvigil.eci.gov.in/" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }} onClick={() => analytics.event('click_external_link', { category: 'Helpline', label: 'cVIGIL' })}>
                         <span>Link</span> <ExternalLink size={10} />
                       </a>
                     </div>
@@ -972,7 +987,7 @@ export default function VoterAwareness() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-main)' }}>Saksham App (For PwD)</div>
-                      <a href="https://www.eci.gov.in/pwd-app" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                      <a href="https://www.eci.gov.in/pwd-app" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }} onClick={() => analytics.event('click_external_link', { category: 'Helpline', label: 'Saksham' })}>
                         <span>Link</span> <ExternalLink size={10} />
                       </a>
                     </div>
