@@ -72,7 +72,7 @@ export default function VoterAwareness() {
   // Fetch quiz data
   useEffect(() => {
     if (quizQuestions.length === 0) {
-      fetch('/api/quiz')
+      fetch(`/api/quiz?t=${Date.now()}`, { cache: 'no-store' })
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) setQuizQuestions(data);
@@ -134,6 +134,7 @@ export default function VoterAwareness() {
   };
 
   const handleRestartQuiz = () => {
+    setQuizQuestions([]);
     setQuizStarted(false);
     setUserName('');
     setScore(0);
