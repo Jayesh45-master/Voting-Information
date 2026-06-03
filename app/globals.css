@@ -199,6 +199,10 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+.awareness-card {
+  padding: 2rem;
+}
+
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);

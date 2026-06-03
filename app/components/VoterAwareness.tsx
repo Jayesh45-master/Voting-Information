@@ -368,7 +368,7 @@ export default function VoterAwareness() {
   };
 
   return (
-    <div className="card glass-panel" style={{ padding: '2rem', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '16px' }}>
+    <div className="card glass-panel awareness-card" style={{ border: '1px solid rgba(255,255,255,0.15)', borderRadius: '16px' }}>
       
       {/* Sub tabs navigation */}
       <div className="awareness-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', flexWrap: 'wrap', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.2rem', marginBottom: '2rem' }}>
