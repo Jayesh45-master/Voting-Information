@@ -938,7 +938,7 @@ export default function VoterAwareness() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-main)' }}>Voter Helpline Number: 1950</div>
-                      <a href="tel:1950" className="btn btn-outline" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>Call</a>
+                      <a href="tel:1950" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px' }}>Call</a>
                     </div>
                     <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                       Toll-free national citizen helpline. Call for details about registration, EPIC cards, polling booths, and election schedules.
@@ -954,7 +954,7 @@ export default function VoterAwareness() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-main)' }}>cVIGIL Mobile App</div>
-                      <a href="https://cvigil.eci.gov.in/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                      <a href="https://cvigil.eci.gov.in/" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
                         <span>Link</span> <ExternalLink size={10} />
                       </a>
                     </div>
@@ -972,7 +972,7 @@ export default function VoterAwareness() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--text-main)' }}>Saksham App (For PwD)</div>
-                      <a href="https://www.eci.gov.in/pwd-app" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                      <a href="https://www.eci.gov.in/pwd-app" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-small" style={{ padding: '0.2rem 0.6rem', fontSize: '0.75rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
                         <span>Link</span> <ExternalLink size={10} />
                       </a>
                     </div>
